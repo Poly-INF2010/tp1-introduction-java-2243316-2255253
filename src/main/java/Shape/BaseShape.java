@@ -120,7 +120,7 @@ public class BaseShape extends Transform implements Cloneable {
      * @return Shallow copy of all coordinates contained by this BaseShape
      */
     public Collection<Point2d> getCoords() {
-        return this.coords;
+        return new ArrayList<>(this.coords);
     }
 
     /** TODO
@@ -219,10 +219,6 @@ public class BaseShape extends Transform implements Cloneable {
 
         return new Point2d(minX, minY);
     }
-
-
-
-
 
     /** TODO
      * @return Deep copy of the current shape
