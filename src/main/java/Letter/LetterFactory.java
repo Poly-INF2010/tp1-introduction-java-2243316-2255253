@@ -20,14 +20,14 @@ public final class LetterFactory {
         // diagonal length = sqrt(h^2 + (w/2)^2)
         Double diagonalLen = Math.sqrt(Math.pow(maxHeight, 2)+Math.pow(halfMaxWidth, 2));
 
-        Rectangle leftDiagonal = new Rectangle(diagonalLen, stripeThickness);
+        Rectangle leftDiagonal = new Rectangle(diagonalLen, halfStripeThickness);
         leftDiagonal.rotate(leftDiagonal.getCoords(), 2*Math.PI - Math.atan(maxHeight/halfMaxWidth));
 
-        Rectangle rightDiagonal = new Rectangle(diagonalLen, stripeThickness);
+        Rectangle rightDiagonal = new Rectangle(diagonalLen, halfStripeThickness);
         rightDiagonal.rotate(rightDiagonal.getCoords(), Math.atan(maxHeight/halfMaxWidth));
         rightDiagonal.translate(rightDiagonal.getCoords(), new Point2d(halfMaxWidth, 0.0));
 
-        Rectangle horizontal = new Rectangle(halfMaxWidth, stripeThickness);
+        Rectangle horizontal = new Rectangle(halfMaxWidth, halfStripeThickness);
         horizontal.translate(horizontal.getCoords(), new Point2d(halfMaxWidth/2,0.0));
 
         BaseShape A = new BaseShape();
@@ -43,13 +43,18 @@ public final class LetterFactory {
      * @return BaseShape containing the letter B
      */
     public static BaseShape create_B() {
-        Rectangle vertical = new Rectangle(stripeThickness, maxHeight);
+        Rectangle vertical = new Rectangle(halfStripeThickness, maxHeight);
 
         Ellipse upperEllipse = new Ellipse(maxWidth, halfMaxHeight);
-        upperEllipse.translate(upperEllipse.getCoords(), new Point2d(halfMaxWidth, 3/4 * maxHeight));
+        Ellipse r_inner_upperEllipse = new Ellipse(maxWidth/1.2, halfMaxHeight/1.2);
+        upperEllipse.remove(r_inner_upperEllipse);
+        upperEllipse.translate(upperEllipse.getCoords(), new Point2d(halfMaxWidth, maxHeight/4));
 
         Ellipse lowerEllipse = new Ellipse(maxWidth, halfMaxHeight);
-        lowerEllipse.translate(lowerEllipse.getCoords(), new Point2d(halfMaxWidth, 1/4 * maxHeight));
+        Ellipse r_inner_lowerEllipse = new Ellipse(maxWidth/1.2, halfMaxHeight/1.2);
+        lowerEllipse.remove(r_inner_lowerEllipse);
+        lowerEllipse.translate(lowerEllipse.getCoords(), new Point2d(halfMaxWidth, -maxHeight/4));
+
 
         BaseShape B = new BaseShape();
         B.add(vertical);
@@ -66,8 +71,15 @@ public final class LetterFactory {
     public static BaseShape create_C() {
         Ellipse ellipse = new Ellipse(maxWidth, maxHeight);
 
+        Rectangle rectangle = new Rectangle(halfMaxWidth, halfMaxHeight);
+        rectangle.translate(rectangle.getCoords(), new Point2d(halfMaxWidth/2, 0.0));
+
+        Ellipse r_innerEllipse = new Ellipse(maxWidth/1.5, maxHeight/1.2);
+
         BaseShape C = new BaseShape();
         C.add(ellipse);
+        C.remove(rectangle);
+        C.remove(r_innerEllipse);
         return C;
     }
 
@@ -76,16 +88,16 @@ public final class LetterFactory {
      * @return BaseShape containing the letter E
      */
     public static BaseShape create_E() {
-        Rectangle vertical = new Rectangle(stripeThickness, maxHeight);
+        Rectangle vertical = new Rectangle(halfStripeThickness, maxHeight);
         vertical.translate(vertical.getCoords(), new Point2d(0.0, halfMaxHeight));
 
-        Rectangle upperHorizontal = new Rectangle(maxWidth, stripeThickness);
+        Rectangle upperHorizontal = new Rectangle(maxWidth, halfStripeThickness);
         upperHorizontal.translate(upperHorizontal.getCoords(), new Point2d(halfMaxWidth, maxHeight));
 
-        Rectangle middleHorizontal = new Rectangle(maxWidth, stripeThickness);
+        Rectangle middleHorizontal = new Rectangle(maxWidth, halfStripeThickness);
         middleHorizontal.translate(middleHorizontal.getCoords(), new Point2d(halfMaxWidth, halfMaxHeight));
 
-        Rectangle lowerHorizontal = new Rectangle(maxWidth, stripeThickness);
+        Rectangle lowerHorizontal = new Rectangle(maxWidth, halfStripeThickness);
         lowerHorizontal.translate(lowerHorizontal.getCoords(), new Point2d(halfMaxWidth, 0.0));
 
         BaseShape E = new BaseShape();
@@ -102,12 +114,12 @@ public final class LetterFactory {
      * @return BaseShape containing the letter H
      */
     public static BaseShape create_H() {
-        Rectangle leftVertical = new Rectangle(stripeThickness, maxHeight);
+        Rectangle leftVertical = new Rectangle(halfStripeThickness, maxHeight);
 
-        Rectangle rightVertical = new Rectangle(stripeThickness, maxHeight);
+        Rectangle rightVertical = new Rectangle(halfStripeThickness, maxHeight);
         rightVertical.translate(rightVertical.getCoords(), new Point2d(maxWidth, 0.0));
 
-        Rectangle horizontal = new Rectangle(maxWidth, stripeThickness);
+        Rectangle horizontal = new Rectangle(maxWidth, halfStripeThickness);
         horizontal.translate(horizontal.getCoords(), new Point2d(halfMaxWidth, 0.0));
 
         BaseShape H = new BaseShape();
@@ -123,13 +135,13 @@ public final class LetterFactory {
      * @return BaseShape containing the letter N
      */
     public static BaseShape create_N() {
-        Rectangle leftVertical = new Rectangle(stripeThickness, maxHeight);
+        Rectangle leftVertical = new Rectangle(halfStripeThickness, maxHeight);
 
-        Rectangle rightVertical = new Rectangle(stripeThickness, maxHeight);
+        Rectangle rightVertical = new Rectangle(halfStripeThickness, maxHeight);
         rightVertical.translate(rightVertical.getCoords(), new Point2d(maxWidth, 0.0));
 
         Double diagonalLen = Math.sqrt(Math.pow(maxHeight, 2) + Math.pow(maxWidth, 2));
-        Rectangle diagonal = new Rectangle(diagonalLen, stripeThickness);
+        Rectangle diagonal = new Rectangle(diagonalLen, halfStripeThickness);
         diagonal.rotate(diagonal.getCoords(), Math.atan(maxHeight/maxWidth));
         diagonal.translate(diagonal.getCoords(), new Point2d(halfMaxWidth, 0.0));
 
@@ -146,10 +158,13 @@ public final class LetterFactory {
      * @return BaseShape containing the letter O
      */
     public static BaseShape create_O() {
-        Ellipse ellipse = new Ellipse(maxWidth, maxHeight);
+        Ellipse outerEllipse = new Ellipse(maxWidth, maxHeight);
+
+        Ellipse r_innerEllipse = new Ellipse(maxWidth/1.5, maxHeight/1.2);
 
         BaseShape O = new BaseShape();
-        O.add(ellipse);
+        O.add(outerEllipse);
+        O.remove(r_innerEllipse);
         return O;
     }
 

@@ -11,11 +11,11 @@ public class Ellipse extends BaseShape {
      * @param heightDiameter Height of the Ellipse
      */
     public Ellipse(Double widthDiameter, Double heightDiameter) {
-        int nPointsWidth = (int)(widthDiameter/0.5);
-        int nPointsHeight = (int)(heightDiameter/0.5);
+        int nPointsWidth = (int) (widthDiameter / 0.5);
+        int nPointsHeight = (int) (heightDiameter / 0.5);
 
-        Double botLeftX = -widthDiameter/2;
-        Double botLeftY = -heightDiameter/2;
+        Double botLeftX = -widthDiameter / 2;
+        Double botLeftY = -heightDiameter / 2;
 
         Double x = botLeftX;
         Double y = botLeftY;
@@ -23,7 +23,10 @@ public class Ellipse extends BaseShape {
         for (int i = 0; i < nPointsWidth; i++) {
             for (int j = 0; j < nPointsHeight; j++) {
                 Point2d newPoint = new Point2d(x, y);
-                if ((Math.pow(x, 2)/Math.pow(widthDiameter, 2))+(Math.pow(y, 2)/Math.pow(heightDiameter, 2))<=1){
+                Double adjustedX = x / (widthDiameter / 2);
+                Double adjustedY = y / (heightDiameter / 2);
+
+                if ((Math.pow(adjustedX, 2) + Math.pow(adjustedY, 2)) <= 1) {
                     this.add(newPoint);
                 }
                 y += 0.5;
