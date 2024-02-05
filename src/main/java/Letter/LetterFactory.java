@@ -10,8 +10,8 @@ public final class LetterFactory {
     final static Double halfMaxWidth = maxWidth / 2;
     final static Double stripeThickness = maxHeight / 8;
     final static Double halfStripeThickness = stripeThickness / 2;
-
-
+    final static Double removalEllipseCoeff1 = 1.2;
+    final static Double removalEllipseCoeff2 = 1.5;
     /** TODO
      * Create the letter A graphically
      * @return BaseShape containing the letter A
@@ -46,12 +46,12 @@ public final class LetterFactory {
         Rectangle vertical = new Rectangle(halfStripeThickness, maxHeight);
 
         Ellipse upperEllipse = new Ellipse(maxWidth, halfMaxHeight);
-        Ellipse r_inner_upperEllipse = new Ellipse(maxWidth/1.2, halfMaxHeight/1.2);
+        Ellipse r_inner_upperEllipse = new Ellipse(maxWidth/removalEllipseCoeff1, halfMaxHeight/removalEllipseCoeff1);
         upperEllipse.remove(r_inner_upperEllipse);
         upperEllipse.translate(upperEllipse.getCoords(), new Point2d(halfMaxWidth, maxHeight/4));
 
         Ellipse lowerEllipse = new Ellipse(maxWidth, halfMaxHeight);
-        Ellipse r_inner_lowerEllipse = new Ellipse(maxWidth/1.2, halfMaxHeight/1.2);
+        Ellipse r_inner_lowerEllipse = new Ellipse(maxWidth/removalEllipseCoeff1, halfMaxHeight/removalEllipseCoeff1);
         lowerEllipse.remove(r_inner_lowerEllipse);
         lowerEllipse.translate(lowerEllipse.getCoords(), new Point2d(halfMaxWidth, -maxHeight/4));
 
@@ -74,7 +74,7 @@ public final class LetterFactory {
         Rectangle rectangle = new Rectangle(halfMaxWidth, halfMaxHeight);
         rectangle.translate(rectangle.getCoords(), new Point2d(halfMaxWidth/2, 0.0));
 
-        Ellipse r_innerEllipse = new Ellipse(maxWidth/1.5, maxHeight/1.2);
+        Ellipse r_innerEllipse = new Ellipse(maxWidth/removalEllipseCoeff2, maxHeight/removalEllipseCoeff1);
 
         BaseShape C = new BaseShape();
         C.add(ellipse);
@@ -160,7 +160,7 @@ public final class LetterFactory {
     public static BaseShape create_O() {
         Ellipse outerEllipse = new Ellipse(maxWidth, maxHeight);
 
-        Ellipse r_innerEllipse = new Ellipse(maxWidth/1.5, maxHeight/1.2);
+        Ellipse r_innerEllipse = new Ellipse(maxWidth/removalEllipseCoeff2, maxHeight/removalEllipseCoeff1);
 
         BaseShape O = new BaseShape();
         O.add(outerEllipse);

@@ -42,9 +42,6 @@ public class Point2d extends AbstractPoint {
      */
     @Override
     public Point2d translate(Double[] translateVector) {
-//        for (int i = 0; i < translateVector.length; i++){
-//            this.vector[i] += translateVector[i];
-//        }
         PointOperator.translate(this.vector, translateVector);
         return this;
     }

@@ -29,6 +29,7 @@ public class LetterTest {
         letterPlacer.placeNext('N');
         letterPlacer.placeNext('C');
         letterPlacer.placeNext('E');
+
         letterPlacer.saveImage("all", true);
 
         File tmpFile = new File("all.jpg");
